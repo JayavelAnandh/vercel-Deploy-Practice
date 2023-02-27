@@ -1,20 +1,20 @@
 
 import express from "express";
 import cors from "cors";
+import { productsRouter } from "./routes/products.js"
 const app = express();
 
 app.use(express.static("express"));
 app.use(express.json());
 app.use(cors())
 
-import { productsRouter } from "./routes/products.js";
 
 app.use("/data",productsRouter)
 
-app.use((req,res)=>{
-    res.status(404).send({Response:"Data not found"})
+// app.use((req,res)=>{
+//     res.status(404).send({Response:"Data not found"})
     
-})
+// })
 app.get("/", (req, res)=>{
     res.send("Hello i'm working fine")
  })
