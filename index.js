@@ -1,23 +1,30 @@
+// const express = require("express");
+import express from "express"
+import dotenv from "dotenv"
+import { studentsRouter } from "./routes/students.js"
+import cors from "cors"
 
-import express from "express";
-import cors from "cors";
-import { productsRouter } from "./routes/products.js"
+// env configurations 
+dotenv.config()
+
+const PORT = process.env.PORT
+
+// middle wares
 const app = express();
+app.use(express.json()) // middleware tells server to use json
+app.use(cors())
 
 app.get("/", (req, res)=>{
-    res.send("Hello i'm working fine")
- })
+   res.send("Hello i'm working fine")
+})
 
-app.use(express.static("express"));
-app.use(express.json());
-app.use(cors());
+app.use("/students", studentsRouter)
 
+// http server initialization
+app.listen(PORT, ()=>console.log(`server started localhost:${PORT}`))
 
-app.use("/data",productsRouter)
-
-// app.use((req,res)=>{
-//     res.status(404).send({Response:"Data not found"})
-    
+// const secret = "hey i'm from new file"
+//app.use(express.static("express")); // loading the static file
+// app.get("/static", (req, res)=>{
+//     res.sendFile(path.join(__dirname, "express/sum.txt"))
 // })
-
-app.listen(9000, () => console.log(`server started localhost: 9000`));
