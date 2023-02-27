@@ -1,5 +1,7 @@
 {
+    "version":2,
     "name":"Data",
+    
     "builds" : [
         {
             "src": "./index.js",
